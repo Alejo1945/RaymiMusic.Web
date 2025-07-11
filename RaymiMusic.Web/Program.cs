@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(opt =>
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("RaymiMusicDb")));
+    opt.UseNpgsql(builder.Configuration.GetConnectionString("RaymiMusicDb")));
 
 // Registra controladores y configura Newtonsoft.Json
 builder.Services

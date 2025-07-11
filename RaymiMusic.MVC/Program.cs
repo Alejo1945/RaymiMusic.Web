@@ -20,7 +20,7 @@ builder.Services.AddHttpClient("RaymiMusicApi", client =>
 });
 //Configurar base de datos para usuarios
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("RaymiMusicDb")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("RaymiMusicDb")));
 builder.Services.AddSession();
 
 
@@ -38,6 +38,7 @@ builder.Services.AddScoped<IGenerosApiService, GenerosApiService>();
 
 var app = builder.Build();
 
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -49,6 +50,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
+app.UseAuthorization();
+app.MapRazorPages();
 
 
 //Usuario admin
@@ -76,8 +80,8 @@ using (var scope = app.Services.CreateScope())
 }
 
 
-app.UseAuthorization();
-app.UseSession();
+
+
 // Si en el futuro agregas controladores MVC, descomenta esto:
 // app.MapControllerRoute(
 //     name: "default",

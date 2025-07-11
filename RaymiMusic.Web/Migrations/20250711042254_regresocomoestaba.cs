@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RaymiMusic.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class regresocomoestaba : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,11 +15,11 @@ namespace RaymiMusic.Api.Migrations
                 name: "Artistas",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NombreArtistico = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Biografia = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UrlFotoPerfil = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UrlFotoPortada = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    NombreArtistico = table.Column<string>(type: "text", nullable: false),
+                    Biografia = table.Column<string>(type: "text", nullable: true),
+                    UrlFotoPerfil = table.Column<string>(type: "text", nullable: true),
+                    UrlFotoPortada = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -30,8 +30,8 @@ namespace RaymiMusic.Api.Migrations
                 name: "Generos",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Nombre = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,9 +42,9 @@ namespace RaymiMusic.Api.Migrations
                 name: "ListasPublicas",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreadaPor = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Nombre = table.Column<string>(type: "text", nullable: false),
+                    CreadaPor = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -55,10 +55,10 @@ namespace RaymiMusic.Api.Migrations
                 name: "Planes",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Precio = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
-                    DescargasMaximas = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Nombre = table.Column<string>(type: "text", nullable: false),
+                    Precio = table.Column<decimal>(type: "numeric(8,2)", nullable: false),
+                    DescargasMaximas = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,10 +69,10 @@ namespace RaymiMusic.Api.Migrations
                 name: "Albumes",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Titulo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FechaLanzamiento = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ArtistaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Titulo = table.Column<string>(type: "text", nullable: false),
+                    FechaLanzamiento = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    ArtistaId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -89,11 +89,11 @@ namespace RaymiMusic.Api.Migrations
                 name: "Usuarios",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HashContrasena = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rol = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PlanSuscripcionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Correo = table.Column<string>(type: "text", nullable: false),
+                    HashContrasena = table.Column<string>(type: "text", nullable: false),
+                    Rol = table.Column<string>(type: "text", nullable: false),
+                    PlanSuscripcionId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -110,13 +110,13 @@ namespace RaymiMusic.Api.Migrations
                 name: "Canciones",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Titulo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RutaArchivo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Duracion = table.Column<TimeSpan>(type: "time", nullable: false),
-                    GeneroId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ArtistaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AlbumId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Titulo = table.Column<string>(type: "text", nullable: false),
+                    RutaArchivo = table.Column<string>(type: "text", nullable: false),
+                    Duracion = table.Column<TimeSpan>(type: "interval", nullable: false),
+                    GeneroId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ArtistaId = table.Column<Guid>(type: "uuid", nullable: false),
+                    AlbumId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -144,10 +144,10 @@ namespace RaymiMusic.Api.Migrations
                 name: "ListasReproduccion",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EsPublica = table.Column<bool>(type: "bit", nullable: false),
-                    UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Nombre = table.Column<string>(type: "text", nullable: false),
+                    EsPublica = table.Column<bool>(type: "boolean", nullable: false),
+                    UsuarioId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -164,10 +164,10 @@ namespace RaymiMusic.Api.Migrations
                 name: "Perfiles",
                 columns: table => new
                 {
-                    UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NombreCompleto = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UrlFoto = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FechaNacimiento = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UsuarioId = table.Column<Guid>(type: "uuid", nullable: false),
+                    NombreCompleto = table.Column<string>(type: "text", nullable: true),
+                    UrlFoto = table.Column<string>(type: "text", nullable: true),
+                    FechaNacimiento = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -184,10 +184,10 @@ namespace RaymiMusic.Api.Migrations
                 name: "CancionesEnListas",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ListaReproduccionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CancionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ListaPublicaId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    ListaReproduccionId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CancionId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ListaPublicaId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {

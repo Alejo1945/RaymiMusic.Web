@@ -1,0 +1,44 @@
+﻿@page
+@model RaymiMusic.MVC.Pages.Perfiles.EditModel
+@{
+    ViewData["Title"] = "Editar Perfil";
+    Layout = "_Layout";
+}
+
+<div class="container mt-5">
+    <div class="card mx-auto bg-dark text-light" style="max-width: 600px;">
+        <div class="card-body">
+            <h3 class="text-center mb-4">Editar Perfil</h3>
+
+            <form method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label">Nombre completo</label>
+                    <input asp-for="Perfil.NombreCompleto" class="form-control" />
+                </div>
+
+                @if (Model.Rol != "Admin")
+                {
+                    <div class="mb-3">
+                        <label class="form-label">Foto de perfil</label>
+                        <input type="file" asp-for="Foto" class="form-control" />
+                    </div>
+                }
+
+                @if (Model.Rol == "Artista")
+                {
+                    <div class="mb-3">
+                        <label class="form-label">Nombre artístico</label>
+                        <input asp-for="NombreArtistico" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Biografía</label>
+                        <textarea asp-for="Biografia" class="form-control" rows="4"></textarea>
+                    </div>
+                }
+
+                <button type="submit" class="btn btn-primary w-100">Guardar cambios</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -39,7 +39,13 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-page="/Generos/Index">Géneros</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-page="/Perfiles/Perfiles">
+                                <i class="bi bi-person"></i> Mi Perfil
+                            </a>
                         </li>
+                        
+                       
                     </ul>
 
                     <ul class="navbar-nav">
@@ -57,6 +63,7 @@
                                     </button>
                                 </form>
                             </li>
+                           
                         }
                         else
                         {
@@ -96,4 +103,3 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
-

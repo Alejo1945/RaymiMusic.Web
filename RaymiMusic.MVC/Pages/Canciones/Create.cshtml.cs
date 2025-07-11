@@ -1,13 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc;
 using RaymiMusic.Modelos;
 using RaymiMusic.MVC.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using static System.Net.WebRequestMethods;
-
 namespace RaymiMusic.MVC.Pages.Canciones
 {
     public class CreateModel : PageModel
@@ -32,13 +26,20 @@ namespace RaymiMusic.MVC.Pages.Canciones
         public IEnumerable<Artista> Artistas { get; set; } = Array.Empty<Artista>();
         public IEnumerable<Genero> Generos { get; set; } = Array.Empty<Genero>();
 
-        // Colección donde volcaremos los mensajes de error
         public List<string> Errores { get; set; } = new();
+
+        // ✅ Carga inicial de géneros y artistas
+        public async Task<IActionResult> OnGetAsync()
+        {
+            Generos = await _genSvc.ObtenerTodosAsync();
+            Artistas = await _artSvc.ObtenerTodosAsync();
+            return Page();
+        }
 
         public async Task<IActionResult> OnPostAsync()
         {
             Generos = await _genSvc.ObtenerTodosAsync();
-            Artistas = await _artSvc.ObtenerTodosAsync(); // por si es admin
+            Artistas = await _artSvc.ObtenerTodosAsync();
 
             if (!ModelState.IsValid)
             {
@@ -53,7 +54,6 @@ namespace RaymiMusic.MVC.Pages.Canciones
             {
                 var artista = await _artSvc.ObtenerPorCorreoAsync(correo!);
                 if (artista == null) return Unauthorized();
-
                 Cancion.ArtistaId = artista.Id;
             }
 
@@ -61,6 +61,5 @@ namespace RaymiMusic.MVC.Pages.Canciones
             await _svc.CrearAsync(Cancion);
             return RedirectToPage("Index");
         }
-
     }
 }
